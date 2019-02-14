@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Table</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+	
+	<div class="container-fluid">
+		<div class="row">
+			<div id="dialog" title="BULK IMPORT" style="align:center;">
+				<div class="pad">
+					<p id="float-left">Select xls or xlsx file</p>
+					<a id="float-right" href="details.xlsx" download>
+						<i class="fa fa-download" aria-hidden="true" >&nbsp;Download Template</i>
+					</a>
+					
+					<div id="filedrop" contenteditable='true' class='editable' data-placeholder='Drag And Drop Here'>
+							<div id="content">
+									<p>OR</p>
+							</div>
+							<form>
+								<input type="file" id="file" class="file" >
+								<label for="file" id="txt">Select a files from computer</label>
+								<label  id="txt1" style="display: none;"><span id='clear'>delete</span></label>
+							</form>
+					</div>
+					<div id="btn-pos">
+					<button type="button" class="btn btn-danger" id="cancel">Cancel</button>
+					<button type="button" class="btn btn-primary" id="disaable" disabled="disabled"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;Import</button>
+					</div>
+				</div>
+			</div>
+			<button id="opener" class="opener btn btn-primary "><i class="fa fa-upload" aria-hidden="true" >&nbsp;IMPORT</i></button>
+		</div>
+	</div>
+	
+	<script>
+		//Initialize dialog
+		$("#dialog").dialog({
+			width: 500, 
+			height:400,
+			autoOpen: false,
+			show: {
+				effect: "blind",
+			},
+			hide: {
+				effect: "explode",
+			}
+		});
+
+		//Open it when #opener is clicked
+		$("#opener").click(function () {
+			$("#dialog").dialog("open");
+		});
+		
+		
+		  $("#filedrop").mouseenter(function(){
+			$("#content p").hide();
+		  });
+		  
+		  $("#filedrop").mouseleave(function(){
+			$("#content p").show();
+		  });
+		
+		 $('input[type="file"]').change(function(e){
+            var fileName = e.target.files[0].name;
+            //alert('The file "' + fileName +  '" has been selected.');
+			$("#txt").hide();
+			$("#txt1").append("   "+fileName);
+			$("#txt1").show();
+			$('#disaable').removeAttr("disabled");
+			//$("#txt").text("");
+        });
+		
+		$("#clear").click(function(){
+			$('input[type="file"]').val("");
+			$("#txt").show();
+			$("#txt").html("Select a files from computer");
+			$("#txt1").hide();
+			$('#disaable').prop("disabled","disabled");
+		});
+		
+		$("#cancel").click(function(){
+			$("#clear").click();
+		})
+		
+	</script>
+</body>
+</html>
