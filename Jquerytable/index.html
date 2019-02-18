@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Table</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.5/xlsx.full.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.13.5/jszip.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+	
+	<div class="container">
+		<div class="row">
+			<div id="dialog" title="BULK IMPORT" style="align:center;">
+				<div class="pad">
+					<p id="float-left">Select xls or xlsx file</p>
+					<a id="float-right" href="details.xlsx" download>
+						<i class="fa fa-download" aria-hidden="true" >&nbsp;Download Template</i>
+					</a>
+					
+					<div id="filedrop" contenteditable='true' class='editable' data-placeholder='Drag And Drop Here'>
+							<div id="content">
+									<p>OR</p>
+							</div>
+							<form>
+								<input type="file" id="file" class="file">  <!-- accept=".xls, .xlsx" -->
+								<label for="file" id="txt">Select a files from computer</label>
+								<label  id="txt1" style="display: none;"><span id='clear'><i class="fa fa-trash-o" aria-hidden="true"></i> </span><span id="show"></span></label>
+							</form>
+					</div>
+					<div id="btn-pos">
+					<button type="button" class="btn btn-danger" id="cancel">Cancel</button>
+					<button type="button" class="btn btn-primary" id="disaable" disabled="disabled" onclick="Upload()"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;Import</button>
+					</div>
+				</div>
+			</div>
+			<button id="opener" class="opener btn btn-primary "><i class="fa fa-upload" aria-hidden="true" >&nbsp;IMPORT</i></button>
+			<div id="dvExcel"></div>
+		</div>
+	</div>
+	
+	<script>
+		//Initialize dialog
+		$("#dialog").dialog({
+			width: 500, 
+			height:400,
+			autoOpen: false,
+			show: {
+				effect: "blind",
+			},
+			hide: {
+				effect: "explode",
+			}
+		});
+
+		//Open it when #opener is clicked
+		$("#opener").click(function () {
+			$("#dialog").dialog("open");
+		});
+		
+		
+		  $("#filedrop").mouseenter(function(){
+			$("#content p").hide();
+		  });
+		  
+		  $("#filedrop").mouseleave(function(){
+			$("#content p").show();
+		  });
+		
+		 $('input[type="file"]').change(function(e){
+            var fileName = e.target.files[0].name;
+			var y= fileName.indexOf(".");
+			var z = fileName.slice(y+1);
+			console.log(z);
+            //alert('The file Type"' + fileType +  '" has been selected.');
+			if(z == "xlsx" || z == "xls"){
+				$("#txt").hide();
+				$("#show").append("   "+fileName);
+				$("#txt1").show();
+				$('#disaable').removeAttr("disabled");
+			}else{
+				alert("Please Select Excel Files");
+			}
+			
+        });
+		
+		$('input[type="file"]').click(function(e){
+           $("#clear").click();
+        });
+		
+		$("#clear").click(function(){
+			$('input[type="file"]').val("");
+			$("#txt").show();
+			$("#txt").html("Select a files from computer");
+			$("#show").html("");
+			$("#txt1").hide();
+			$('#disaable').prop("disabled","disabled");
+		});
+		
+		$("#cancel").click(function(){
+			$("#clear").click();
+		})
+		
+		function Upload() {
+        //Reference the FileUpload element.
+        var fileUpload = document.getElementById("file");
+            if (typeof (FileReader) != "undefined") {
+				console.log(typeof (FileReader));
+                var reader = new FileReader();
+
+                //For Browsers other than IE.
+                if (reader.readAsBinaryString) {
+                    reader.onload = function (e) {
+                        ProcessExcel(e.target.result);
+                    };
+                    reader.readAsBinaryString(file.files[0]);
+                }
+            } 
+			$(".ui-dialog-titlebar-close").click();
+		};
+		
+		function ProcessExcel(data) {
+			//Read the Excel File data.
+			var workbook = XLSX.read(data, {
+				type: 'binary'
+			});
+	 
+			//Fetch the name of First Sheet.
+			var firstSheet = workbook.SheetNames[0];
+
+			//Read all rows from First Sheet into an JSON array.
+			var excelRows = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[firstSheet]);
+			console.log(excelRows);
+			//Create a HTML Table element.
+			var table = document.createElement("table");
+			//table.border = "1";
+			table.setAttribute('class','table table-striped table-bordered example');
+			
+			//Add the header row.
+			var row = table.insertRow(-1);
+	 
+			//Add the header cells.
+			var headerCell = document.createElement("TH");
+			headerCell.innerHTML = "Sno";
+			row.appendChild(headerCell);
+	 
+			headerCell = document.createElement("TH");
+			headerCell.innerHTML = "Device Name";
+			row.appendChild(headerCell);
+	 
+			headerCell = document.createElement("TH");
+			headerCell.innerHTML = "Device IP";
+			row.appendChild(headerCell);
+			
+			headerCell = document.createElement("TH");
+			headerCell.innerHTML = "MAC Address";
+			row.appendChild(headerCell);
+	 
+			headerCell = document.createElement("TH");
+			headerCell.innerHTML = "Reachability";
+			row.appendChild(headerCell);
+	 
+			//Add the data rows from Excel file.
+			for (var i = 0; i < excelRows.length; i++) {
+				//Add the data row.
+				var row = table.insertRow(-1);
+	 
+				//Add the data cells.
+				var cell = row.insertCell(-1);
+				cell.innerHTML = excelRows[i].Sno;
+	 
+				cell = row.insertCell(-1);
+				cell.innerHTML = excelRows[i].DeviceName;
+	 
+				cell = row.insertCell(-1);
+				cell.innerHTML = excelRows[i].DeviceIP;
+				
+				cell = row.insertCell(-1);
+				cell.innerHTML = excelRows[i].MACAddress;
+				
+				cell = row.insertCell(-1);
+				cell.innerHTML = excelRows[i].Reachability;
+			}
+	 
+			var dvExcel = document.getElementById("dvExcel");
+			dvExcel.innerHTML = "";
+			dvExcel.appendChild(table);
+		};
+	</script>
+</body>
+</html>
