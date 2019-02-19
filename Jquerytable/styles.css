@@ -4,8 +4,8 @@ a {
 }
 
 a:hover {
-  text-decoration: none;
-  color:#1a75ff;
+	text-decoration: none;
+	color:#1a75ff;
 }
 
 .opener{
@@ -75,12 +75,12 @@ label {
 }
 
 .btn {
-  margin-top: 50px;
-  }
+    margin-top: 50px;
+}
   
-  #btn-pos{
-	margin-left: 120px;
-  }
+#btn-pos{
+    margin-left: 120px;
+}
   
   .file{
 	margin: 10px auto;
