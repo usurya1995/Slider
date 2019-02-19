@@ -24,7 +24,7 @@
 				<div class="pad">
 					<p id="float-left">Select xls or xlsx file</p>
 					<a id="float-right" href="details.xlsx" download>
-						<i class="fa fa-download" aria-hidden="true" >&nbsp;Download Template</i>
+						<i class="fa fa-download" aria-hidden="true">&nbsp;Download Template</i>
 					</a>
 					
 					<div id="filedrop" contenteditable='true' class='editable' data-placeholder='Drag And Drop Here'>
@@ -70,15 +70,15 @@
 		});
 		
 		
-		  $("#filedrop").mouseenter(function(){
+		$("#filedrop").mouseenter(function(){
 			$("#content p").hide();
-		  });
+		});
 		  
-		  $("#filedrop").mouseleave(function(){
+		$("#filedrop").mouseleave(function(){
 			$("#content p").show();
-		  });
+		});
 		
-		 $('input[type="file"]').change(function(e){
+		$('input[type="file"]').change(function(e){
             var fileName = e.target.files[0].name;
 			var y= fileName.indexOf(".");
 			var z = fileName.slice(y+1);
@@ -144,12 +144,14 @@
 			console.log(excelRows);
 			//Create a HTML Table element.
 			var table = document.createElement("table");
+			var tableHead = document.createElement("thead");
+			table.appendChild(tableHead);
 			//table.border = "1";
 			table.setAttribute('class','table table-striped table-bordered example');
 			table.setAttribute('id','testTable');
 			//Add the header row.
-			var row = table.insertRow(-1);
-	 
+			var row = tableHead.insertRow(-1);
+			
 			//Add the header cells.
 			var headerCell = document.createElement("TH");
 			headerCell.innerHTML = "Sno";
@@ -170,11 +172,14 @@
 			headerCell = document.createElement("TH");
 			headerCell.innerHTML = "Reachability";
 			row.appendChild(headerCell);
-	 
+			
+			
+			var tableBody = document.createElement("tbody");
+			
 			//Add the data rows from Excel file.
 			for (var i = 0; i < excelRows.length; i++) {
 				//Add the data row.
-				var row = table.insertRow(-1);
+				var row = tableBody.insertRow(-1);
 	 
 				//Add the data cells.
 				var cell = row.insertCell(-1);
@@ -192,6 +197,8 @@
 				cell = row.insertCell(-1);
 				cell.innerHTML = excelRows[i].Reachability;
 			}
+			
+			table.appendChild(tableBody);
 			
 			var dvExcel = document.getElementById("dvExcel");
 			dvExcel.innerHTML = "";
