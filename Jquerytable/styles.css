@@ -92,3 +92,40 @@ label {
  #clear {
     color: red;
 }
+
+td, th {
+  text-align: left;
+  padding: 8px;
+}
+
+#pagination{
+	margin: 1em 0;
+}
+
+#pagination li{
+	list-style: none;
+	display: inline-block;	
+	height: auto;
+	border: 1px solid #fff;
+}
+
+#pagination li a{
+	text-decoration: none;
+	padding: 1em;
+	background: #e1e1e1;
+	text-align: center;
+	display: block;
+    margin: auto;
+    position: relative;
+}
+
+#pos{
+	height: 31px;
+    position: absolute;
+    top: 8%;
+    left: 25%;
+    border-radius: 4px;
+    background-color: #337ab7;
+    color: white;
+    font-weight: bold;
+}
