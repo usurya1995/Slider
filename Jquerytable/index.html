@@ -46,16 +46,18 @@
 			<button id="opener" class="opener btn btn-primary "><i class="fa fa-upload" aria-hidden="true" >&nbsp;IMPORT</i></button>
 			
 			<div>
-			<button id="disaable1" class='btn btn-primary' disabled="disabled" onclick="tableToExcel('testTable', 'Export HTML Table to Excel')" value="Export to Excel"><i class='fa fa-download' aria-hidden='true' >&nbsp;EXPORT TO EXCEL</i></button>
-			<button id="disaable2" class='btn btn-primary' disabled="disabled" onclick="exportToPdf()"><i class='fa fa-download' aria-hidden='true' >&nbsp;PDF</i></button>
-			<select onchange="changePagination(this.value)" id="pos">
-				<option value="5">5</option>
-				<option value="10" selected>10</option>
-				<option value="25">25</option>
-				<option value="50">50</option>
-			</select>
-			<br>
-			<input type="text" id="search" placeholder="Search for names..">
+				<button id="disaable1" class='btn btn-primary' disabled="disabled" onclick="tableToExcel('testTable', 'Export HTML Table to Excel')" value="Export to Excel"><i class='fa fa-download' aria-hidden='true' >&nbsp;EXPORT TO EXCEL</i></button>
+				<button id="disaable2" class='btn btn-primary' disabled="disabled" onclick="exportToPdf()"><i class='fa fa-download' aria-hidden='true' >&nbsp;PDF</i></button>
+				<button id="disaable3" class='btn btn-primary' disabled="disabled" onclick="printData()"><i class="fa fa-print" aria-hidden="true" >&nbsp;PRINT</i></button>
+				<select onchange="changePagination(this.value)" id="pos">
+					<option value="5">5</option>
+					<option value="10" selected>10</option>
+					<option value="25">25</option>
+					<option value="50">50</option>
+					<option value="75">75</option>
+				</select>
+				<br>
+				<input type="text" id="search" placeholder="Search for names..">
 			</div>
 			<!--<input type="text" onkeyup="changePagination(this.value)">-->
 			<div id="dvExcel"></div>
@@ -218,6 +220,7 @@
 			dvExcel.appendChild(table);	
 			$('#disaable1').removeAttr("disabled");
 			$('#disaable2').removeAttr("disabled");
+			$('#disaable3').removeAttr("disabled");
 			showPagination();
 		};
 		
@@ -330,6 +333,15 @@
 			//}
 		});		
 	});
+	
+	function printData()
+	{
+	   var divToPrint=document.getElementById("testTable");
+	   newWin= window.open("");
+	   newWin.document.write(divToPrint.outerHTML);
+	   newWin.print();
+	   newWin.close();
+	}
 		
 	</script>
 </body>
