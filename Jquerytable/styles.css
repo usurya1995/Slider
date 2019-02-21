@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 a {
     color:#1a75ff;
     text-decoration: none;
@@ -123,7 +127,7 @@ td, th {
 	height: 31px;
     position: absolute;
     top: 8%;
-    left: 25%;
+    left: 32%;
     border-radius: 4px;
     background-color: #337ab7;
     color: white;
