@@ -78,6 +78,13 @@ label {
     margin-left: 90px;
 }
 
+#search{
+	position: absolute;
+    left: 432px;
+    top: 52px;
+    padding: 0.25em;
+}
+
 .btn {
     margin-top: 50px;
 }
@@ -134,12 +141,18 @@ tbody td,thead th{
 }
 
 #pos{
-	height: 31px;
-    position: absolute;
-    top: 8%;
-    left: 32%;
     border-radius: 4px;
     background-color: #337ab7;
+    color: white;
+    font-weight: bold;
+}
+
+#f-left{
+	position: absolute;
+    right: 225px;
+    top: 55px;
+    padding: 0.25em;
+	background: #337ab7;
     color: white;
     font-weight: bold;
 }
