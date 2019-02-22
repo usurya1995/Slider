@@ -102,8 +102,18 @@ td, th {
   padding: 8px;
 }
 
+thead{
+	background-color: #337ab7;
+    color: white;
+}
+
+tbody td,thead th{
+	text-align:center;
+}
+
 #pagination{
 	margin: 1em 0;
+	float:right;
 }
 
 #pagination li{
