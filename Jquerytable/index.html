@@ -14,6 +14,7 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="sorttable.js"></script>
 	<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
@@ -50,8 +51,8 @@
 				<button id="disaable2" class='btn btn-primary' disabled="disabled" onclick="exportToPdf()"><i class='fa fa-download' aria-hidden='true' >&nbsp;PDF</i></button>
 				<button id="disaable3" class='btn btn-primary' disabled="disabled" onclick="printData()"><i class="fa fa-print" aria-hidden="true" >&nbsp;PRINT</i></button>
 				<select onchange="changePagination(this.value)" id="pos">
-					<option value="5">5</option>
-					<option value="10" selected>10</option>
+					<option value="5" selected>5</option>
+					<option value="10">10</option>
 					<option value="25">25</option>
 					<option value="50">50</option>
 					<option value="75">75</option>
@@ -222,6 +223,9 @@
 			$('#disaable2').removeAttr("disabled");
 			$('#disaable3').removeAttr("disabled");
 			showPagination();
+			$(function(){
+				$("#testTable").addSortWidget();
+			});
 		};
 		
 		var tableToExcel = (function () {
@@ -239,6 +243,7 @@
             }
         })();
 		
+		
 		function exportToPdf() {
             html2canvas(document.getElementById('testTable'), {
                 onrendered: function (canvas) {
@@ -255,14 +260,14 @@
 		}
 		
 		var x,tr;
-		var i = 10;	
-		var curPagination = 10;
+		var i = 5;	
+		var curPagination = 5;
 		
 		function changePagination(value){
 			
 			if(value == '' || value == 0 || value == null){
-				i = 10;
-				curPagination = 10;
+				i = 5;
+				curPagination = 5;
 			}
 			else{
 				curPagination = value;
@@ -312,36 +317,36 @@
 			return false;
 		}
 		
-	$('#search').keyup(function () {
-				
-		var value = $(this).val();
+		$('#search').keyup(function () {
+					
+			var value = $(this).val();
 
-		$("tbody tr").each(function(index) {			
-			//if (index !== 0) {
-				
-				$row = $(this);
+			$("tbody tr").each(function(index) {			
+				//if (index !== 0) {
+					
+					$row = $(this);
 
-				var id = $row.find("td:nth-child(2)").text().toLowerCase();
-				
+					var id = $row.find("td:nth-child(2)").text().toLowerCase();
+					
 
-				if (id.indexOf(value) !== 0) {
-					$row.hide();
-				}
-				else {
-					$row.show();
-				}
-			//}
-		});		
-	});
+					if (id.indexOf(value) !== 0) {
+						$row.hide();
+					}
+					else {
+						$row.show();
+					}
+				//}
+			});		
+		});
 	
-	function printData()
-	{
-	   var divToPrint=document.getElementById("testTable");
-	   newWin= window.open("");
-	   newWin.document.write(divToPrint.outerHTML);
-	   newWin.print();
-	   newWin.close();
-	}
+		function printData()
+		{
+		   var divToPrint=document.getElementById("testTable");
+		   newWin= window.open("");
+		   newWin.document.write(divToPrint.outerHTML);
+		   newWin.print();
+		   newWin.close();
+		}
 		
 	</script>
 </body>
