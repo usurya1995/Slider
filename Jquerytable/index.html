@@ -19,7 +19,7 @@
 </head>
 <body>
 	
-	<div class="container">
+	<div class="container" id="colorThemes">
 		<div class="row">
 			<div id="dialog" title="BULK IMPORT" style="align:center;">
 				<div class="pad">
@@ -45,24 +45,30 @@
 				</div>
 			</div>
 			<button id="opener" class="opener btn btn-primary "><i class="fa fa-upload" aria-hidden="true" >&nbsp;IMPORT</i></button>
+			<select onchange="changeTheme(this.value)" id="f-left">
+					<option value="redTheme" selected>Red</option>
+					<option value="greenTheme">Green</option>
+					<option value="blueTheme">Blue</option>
+			</select>
 			
 			<div>
 				<button id="disaable1" class='btn btn-primary' disabled="disabled" onclick="tableToExcel('testTable', 'Export HTML Table to Excel')" value="Export to Excel"><i class='fa fa-download' aria-hidden='true' >&nbsp;EXPORT TO EXCEL</i></button>
 				<button id="disaable2" class='btn btn-primary' disabled="disabled" onclick="exportToPdf()"><i class='fa fa-download' aria-hidden='true' >&nbsp;PDF</i></button>
 				<button id="disaable3" class='btn btn-primary' disabled="disabled" onclick="printData()"><i class="fa fa-print" aria-hidden="true" >&nbsp;PRINT</i></button>
-				<select onchange="changePagination(this.value)" id="pos">
-					<option value="5" selected>5</option>
-					<option value="10">10</option>
-					<option value="25">25</option>
-					<option value="50">50</option>
-					<option value="75">75</option>
-				</select>
-				<br>
+				
+				
 				<input type="text" id="search" placeholder="Search for names..">
 			</div>
 			<!--<input type="text" onkeyup="changePagination(this.value)">-->
 			<div id="dvExcel"></div>
 			<ul id="pagination"></ul>
+			<select onchange="changePagination(this.value)" id="pos" style="display:none">
+					<option value="5" selected>5</option>
+					<option value="10">10</option>
+					<option value="25">25</option>
+					<option value="50">50</option>
+					<option value="75">75</option>
+			</select>
 		</div>
 	</div>
 	
@@ -222,6 +228,7 @@
 			$('#disaable1').removeAttr("disabled");
 			$('#disaable2').removeAttr("disabled");
 			$('#disaable3').removeAttr("disabled");
+			$('#pos').show();
 			showPagination();
 			$(function(){
 				$("#testTable").addSortWidget();
