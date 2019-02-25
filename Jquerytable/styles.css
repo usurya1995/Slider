@@ -156,3 +156,114 @@ tbody td,thead th{
     color: white;
     font-weight: bold;
 }
+
+/*Blue Theme*/
+.blueTheme thead{
+	background-color: #337ab7;
+}
+
+.blueTheme tr:nth-child(even) {
+  background-color: #337ab77a;
+}
+.blueTheme #pagination li a{
+	background: #337ab7;
+	color: #fff;
+}
+.blueTheme select{
+	background: #337ab7;
+	color: #fff;
+	padding: .25em 1em;
+}
+
+.blueTheme #search{
+	background: #fff;
+	color: #337ab7;
+	padding: .25em 1em;
+	border-color: #337ab7;
+}
+
+.blueTheme button{
+	background: #337ab7;
+}
+
+.blueTheme button:hover{
+	background: #337ab77a;
+}
+
+.blueTheme #pos{
+	background: #337ab7;
+}
+
+/*Green Theme*/
+.greenTheme thead{
+	background-color: #4CAF50;
+}
+
+.greenTheme tr:nth-child(even) {
+  background-color: #4caf5075;
+}
+.greenTheme #pagination li a{
+	background: #4CAF50;
+	color: #fff;
+}
+.greenTheme select{
+	background: #4CAF50;
+	color: #fff;
+	padding: .25em 1em;
+}
+
+.greenTheme #search{
+	background: #fff;
+	color: #4CAF50;
+	padding: .25em 1em;
+	border-color: #4CAF50;
+}
+
+.greenTheme button{
+	background: #4CAF50;
+}
+
+.greenTheme button:hover{
+	background: #4caf5075;
+}
+
+.greenTheme #pos{
+	background: #4CAF50;
+}
+
+/*Red Theme*/
+.redTheme thead{
+	background-color: #c62121;
+}
+
+.redTheme tr:nth-child(even) {
+  background-color: #c6212185;
+}
+.redTheme #pagination li a{
+	background: #c62121;
+	color: #fff;
+}
+.redTheme select{
+	background: #c62121;
+	color: #fff;
+	padding: .25em 1em;
+}
+
+.redTheme #search{
+	background: #fff;
+	color: #c62121;
+	padding: .25em 1em;
+	border-color: #c62121;
+}
+
+.redTheme button{
+	background: #c62121;
+}
+
+.redTheme button:hover{
+	background: #c6212185;
+}
+
+.redTheme #pos{
+	background: #c62121;
+}
