@@ -19,7 +19,7 @@
 </head>
 <body>
 	
-	<div class="container" id="colorThemes">
+	<div class="container redTheme" id="colorThemes">
 		<div class="row">
 			<div id="dialog" title="BULK IMPORT" style="align:center;">
 				<div class="pad">
@@ -45,7 +45,7 @@
 				</div>
 			</div>
 			<button id="opener" class="opener btn btn-primary "><i class="fa fa-upload" aria-hidden="true" >&nbsp;IMPORT</i></button>
-			<select onchange="changeTheme(this.value)" id="f-left">
+			<select onchange="changeThemes(this.value)" id="f-left">
 					<option value="redTheme" selected>Red</option>
 					<option value="greenTheme">Green</option>
 					<option value="blueTheme">Blue</option>
@@ -85,7 +85,6 @@
 				effect: "explode",
 			}
 		});
-
 		//Open it when #opener is clicked
 		$("#opener").click(function () {
 			$("#dialog").dialog("open");
@@ -140,7 +139,6 @@
             if (typeof (FileReader) != "undefined") {
 				console.log(typeof (FileReader));
                 var reader = new FileReader();
-
                 //For Browsers other than IE.
                 if (reader.readAsBinaryString) {
                     reader.onload = function (e) {
@@ -160,7 +158,6 @@
 			console.log(workbook);
 			//Fetch the name of First Sheet.
 			var firstSheet = workbook.SheetNames[0];
-
 			//Read all rows from First Sheet into an JSON array.
 			var excelRows = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[firstSheet]);
 			console.log(excelRows);
@@ -245,7 +242,6 @@
                 var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
                 var blob = new Blob([format(template, ctx)]);
                 var blobURL = window.URL.createObjectURL(blob);
-
                 window.location.href = uri + base64(format(template, ctx))
             }
         })();
@@ -327,15 +323,12 @@
 		$('#search').keyup(function () {
 					
 			var value = $(this).val();
-
 			$("tbody tr").each(function(index) {			
 				//if (index !== 0) {
 					
 					$row = $(this);
-
 					var id = $row.find("td:nth-child(2)").text().toLowerCase();
 					
-
 					if (id.indexOf(value) !== 0) {
 						$row.hide();
 					}
@@ -355,6 +348,11 @@
 		   newWin.close();
 		}
 		
+		
+		function changeThemes(theme){
+			$("#colorThemes").removeAttr("class");
+			$("#colorThemes").attr("class", "container "+theme);
+		}
 	</script>
 </body>
 </html>
