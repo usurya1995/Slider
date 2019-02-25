@@ -169,6 +169,12 @@ tbody td,thead th{
 	background: #337ab7;
 	color: #fff;
 }
+
+.blueTheme #pagination li a:hover{
+	background: #337ab77a;
+}
+
+
 .blueTheme select{
 	background: #337ab7;
 	color: #fff;
@@ -194,6 +200,10 @@ tbody td,thead th{
 	background: #337ab7;
 }
 
+.blueTheme #f-left{
+	background: #337ab7;
+}
+
 /*Green Theme*/
 .greenTheme thead{
 	background-color: #4CAF50;
@@ -206,6 +216,11 @@ tbody td,thead th{
 	background: #4CAF50;
 	color: #fff;
 }
+
+.greenTheme #pagination li a:hover{
+	background: #4caf5075;
+}
+
 .greenTheme select{
 	background: #4CAF50;
 	color: #fff;
@@ -231,6 +246,10 @@ tbody td,thead th{
 	background: #4CAF50;
 }
 
+.greenTheme #f-left{
+	background: #4CAF50;
+}
+
 /*Red Theme*/
 .redTheme thead{
 	background-color: #c62121;
@@ -243,6 +262,11 @@ tbody td,thead th{
 	background: #c62121;
 	color: #fff;
 }
+
+.redTheme #pagination li a:hover{
+	background: #c6212185;
+}
+
 .redTheme select{
 	background: #c62121;
 	color: #fff;
@@ -265,5 +289,9 @@ tbody td,thead th{
 }
 
 .redTheme #pos{
+	background: #c62121;
+}
+
+.redTheme #f-left{
 	background: #c62121;
 }
