@@ -61,6 +61,9 @@
 			</div>
 			<!--<input type="text" onkeyup="changePagination(this.value)">-->
 			<div id="dvExcel"></div>
+			<div id="result">
+				<a href="">Show More...</a>
+			</div>
 			<ul id="pagination"></ul>
 			<select onchange="changePagination(this.value)" id="pos" style="display:none">
 					<option value="5" selected>5</option>
@@ -353,6 +356,30 @@
 			$("#colorThemes").removeAttr("class");
 			$("#colorThemes").attr("class", "container "+theme);
 		}
+		
+		$("#result a").click(function(){
+		
+		if(i<10){
+			i += 5;
+			curPagination = i;			
+		}
+		else{
+			i -= 5;
+			curPagination = i;			
+		}
+		
+		if(i<10){
+			$(this).text('Show More..');
+		}
+		else{
+			$(this).text('Show Less..');
+		}
+		
+		showPagination();
+		
+		
+		return false;
+	});
 	</script>
 </body>
 </html>
