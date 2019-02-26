@@ -83,6 +83,8 @@ label {
     left: 432px;
     top: 52px;
     padding: 0.25em;
+	border: 2px solid;
+	border-radius: 4px;
 }
 
 .btn {
@@ -145,6 +147,10 @@ tbody td,thead th{
     background-color: #337ab7;
     color: white;
     font-weight: bold;
+}
+
+#result a{
+	text-decoration: none;
 }
 
 #f-left{
