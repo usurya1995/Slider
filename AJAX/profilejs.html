@@ -1,0 +1,74 @@
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<style>
+		h1 {
+			font-size: 30px;
+			font-style: oblique;
+		}
+		td, th {
+			text-align: center;
+			padding: 5px;
+		}
+
+		thead{
+			background-color: #337ab7;
+			color: white;
+			text-transform:uppercase;
+		}
+		
+		tbody>tr>td:nth-child(2){
+			text-transform:uppercase;
+		}
+	</style>
+ </head>
+  
+<body>
+	<h1 class="text-center">STACK OVERFLOW USER DETAILS</h1>
+	<div class="container-fluid">
+		<div class="row">
+			
+			<div class="col-md-12" id="yourdivid"></div>
+			
+		</div>
+	</div>
+	<script>
+var resultDiv = document.getElementById("yourdivid");
+
+var newsURL = "https://api.stackexchange.com/2.2/search?order=desc&sort=activity&intitle=perl&site=stackoverflow";
+
+
+var xmlhttp;
+
+if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp = new XMLHttpRequest();
+} else {
+    // code for IE6, IE5
+    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+}
+
+xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        response = JSON.parse(xmlhttp.responseText);
+        //here you can manipulate the response as you wish, for example you can:
+        var myData = response['items'];
+		console.log(myData);
+        // myData now is an array of the json object
+        var html = '<table>';
+        for(var prop in myData ) {
+            if(myData.hasOwnProperty(prop))
+                 html += '<li>' + prop  + ' = ' + myData[prop].owner.user_id + '</li>';
+				 html += '<li>' + prop  + ' = ' + myData[prop].owner.display_name + '</li>';
+        }
+        html += '</table>';
+        resultDiv.innerHTML = html;
+    }
+}
+
+xmlhttp.open("GET", newsURL, true);
+xmlhttp.send();
+</script>
+</body>
+</html>
