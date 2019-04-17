@@ -1,0 +1,16 @@
+h1 {
+    font-size: 30px;
+    font-style: oblique;
+}
+td, th {
+    text-align: center;
+    padding: 8px;
+}
+thead{
+    background-color: #337ab7;
+    color: white;
+    text-transform:uppercase;
+}
+select{
+    color: black;
+}
