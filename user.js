@@ -11,13 +11,13 @@ $(document).ready(function () {
 
         var headerCell = document.createElement("TH");
         headerCell.innerHTML = "User";
-    
+
         //Create array of options to be added
-        var array = ["All", "1", "2", "3", "4", "5", "6"];
+        var array = ["1", "2", "3", "4", "5", "6"];
 
         //Create and append select list
         var selectList = document.createElement("select");
-        selectList.addEventListener("change",ViewChange);
+        selectList.addEventListener("change", ViewChange);
         selectList.setAttribute("id", "mySelect");
         headerCell.appendChild(selectList);
 
@@ -33,21 +33,22 @@ $(document).ready(function () {
         headerCell = document.createElement("TH");
         headerCell.innerHTML = "Projects";
 
-         //Create array of options to be added
-         var array = ["All", "1", "2", "3", "4", "5", "6"];
+        //Create array of options to be added
+        var array = ["1", "2", "3", "4", "5", "6"];
 
-         //Create and append select list
-         var selectList = document.createElement("select");
-         selectList.setAttribute("id", "mySelect");
-         headerCell.appendChild(selectList);
- 
-         //Create and append the options
-         for (var i = 0; i < array.length; i++) {
-             var option = document.createElement("option");
-             option.setAttribute("value", array[i]);
-             option.text = array[i];
-             selectList.appendChild(option);
-         }
+        //Create and append select list
+        var selectList = document.createElement("select");
+        selectList.addEventListener("change", ViewChange1);
+        selectList.setAttribute("id", "mySelect1");
+        headerCell.appendChild(selectList);
+
+        //Create and append the options
+        for (var i = 0; i < array.length; i++) {
+            var option = document.createElement("option");
+            option.setAttribute("value", array[i]);
+            option.text = array[i];
+            selectList.appendChild(option);
+        }
         row.appendChild(headerCell);
 
         var tableBody = document.createElement("tbody");
@@ -58,11 +59,9 @@ $(document).ready(function () {
             var row = tableBody.insertRow(-1);
             var cell = row.insertCell(-1);
             cell.innerHTML = Object.keys(val);
-            console.log(cell);
 
             cell = row.insertCell(-1);
             cell.innerHTML = Object.values(val);
-            console.log(cell);
         });
 
         table.appendChild(tableBody);
@@ -73,33 +72,46 @@ $(document).ready(function () {
     });
 
     function ViewChange(evt) {
-        var $selectText = $("#mySelect option:selected" ).text().toLowerCase();
-        console.log("---"+$selectText);
+        var $selectText = $("#mySelect option:selected").text().toLowerCase();
+        console.log("---" + $selectText);
         var $val = evt.target.value;
-    
-        if ($selectText != 'all') {
-            $('tr').each(function () {
-                if ($(this).find('td').length) {
-                    var txt = '';
-                    if ($val < 6)
-                        txt = $(this).find('td:eq(1)').text().toLowerCase();
-                    else
-                        txt = $(this).find('td:eq(3)').text().toLowerCase();
-    
-                    if (txt === $selectText) {
-                        $(this).show();
-                    }
-                    else {
-                        $(this).hide();
-                    }
-                }
-            })
-        }
-        else {
-            $('tr').show();
-        }
-    
+
+        var tableBody = document.getElementsByTagName("tbody")[0];
+        $("#testTable").find("tr:gt(0)").remove();
+
+        $.getJSON('user.json', function (datas) {
+            for (i = 0; i < parseInt($selectText); i++) {
+                console.log(datas.data.repo[i]);
+                var row = tableBody.insertRow(-1);
+                var cell = row.insertCell(-1);
+                cell.innerHTML = Object.keys(datas.data.repo[i]);
+
+                cell = row.insertCell(-1);
+                cell.innerHTML = Object.values(datas.data.repo[i]);
+            }
+
+        });
     }
 
+    function ViewChange1(evt) {
+        var $selectText = $("#mySelect1 option:selected").text().toLowerCase();
+        console.log("---" + $selectText);
+        var $val = evt.target.value;
 
+        var tableBody = document.getElementsByTagName("tbody")[0];
+        $("#testTable").find("tr:gt(0)").remove();
+
+        $.getJSON('user.json', function (datas) {
+            for (i = 0; i < parseInt($selectText); i++) {
+                console.log(datas.data.repo[i]);
+                var row = tableBody.insertRow(-1);
+                var cell = row.insertCell(-1);
+                cell.innerHTML = Object.keys(datas.data.repo[i]);
+
+                cell = row.insertCell(-1);
+                cell.innerHTML = Object.values(datas.data.repo[i]);
+            }
+
+        });
+    }
 });
